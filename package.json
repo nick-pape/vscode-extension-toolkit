@@ -1,0 +1,16 @@
+{
+  "name": "vscode-extension-toolkit",
+  "version": "0.0.1",
+  "description": "A toolkit providing a more structured method for creating VSCode extensions.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vscode",
+    "vscode-extension",
+    "framework"
+  ],
+  "author": "Nick Pape",
+  "license": "MIT"
+}
