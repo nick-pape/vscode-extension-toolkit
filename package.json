@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "dist/vscode-extension-toolkit.d.ts",
   "scripts": {
-     "build": "heft build --clean && pnpm run generate-docs",
+     "build": "heft build --clean",
      "generate-docs": "cd docs && api-documenter markdown"
   },
   "keywords": [
