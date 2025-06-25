@@ -62,11 +62,6 @@ jobs:
         git status
         git diff
 
-    - name: Check npm authentication
-      run: |
-        echo "Checking npm authentication..."
-        npm whoami
-        
     - name: Publish to NPM
       run: npm publish
       env:
