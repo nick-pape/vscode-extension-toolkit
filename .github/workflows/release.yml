@@ -24,6 +24,11 @@ jobs:
       with:
         version: latest
         
+    - name: Configure npm authentication
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+        
     - name: Get pnpm store directory
       shell: bash
       run: |
@@ -53,8 +58,13 @@ jobs:
         echo "Logging working directory state before publishing..."
         git status
         git diff
+
+    - name: Check npm authentication
+      run: |
+        echo "Checking npm authentication..."
+        npm whoami
         
     - name: Publish to NPM
-      run: pnpm publish --no-git-checks
+      run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
