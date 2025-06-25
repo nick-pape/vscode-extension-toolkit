@@ -4,11 +4,11 @@
 
 ## vscode-extension-toolkit package
 
-## Variables
+## Classes
 
 <table><thead><tr><th>
 
-Variable
+Class
 
 
 </th><th>
@@ -19,12 +19,108 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[PACKAGE\_NAME](./vscode-extension-toolkit.package_name.md)
+[BaseContainer](./vscode-extension-toolkit.basecontainer.md)
 
 
 </td><td>
 
-VSCode Extension Toolkit A toolkit for building and managing VSCode extensions.
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[BaseFeature](./vscode-extension-toolkit.basefeature.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[CommandDefinition](./vscode-extension-toolkit.commanddefinition.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+</tbody></table>
+
+## Abstract Classes
+
+<table><thead><tr><th>
+
+Abstract Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[BaseTreeProvider](./vscode-extension-toolkit.basetreeprovider.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[BaseTreeViewFeature](./vscode-extension-toolkit.basetreeviewfeature.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+</tbody></table>
+
+## Type Aliases
+
+<table><thead><tr><th>
+
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[Constructor](./vscode-extension-toolkit.constructor.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[ISerializable](./vscode-extension-toolkit.iserializable.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
 
 
 </td></tr>

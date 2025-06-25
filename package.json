@@ -25,6 +25,7 @@
     "@rushstack/heft-typescript-plugin": "^0.9.8",
     "@rushstack/node-core-library": "^5.13.1",
     "@types/node": "^24.0.3",
+    "@types/vscode": "^1.100.0",
     "eslint": "^8.57.0",
     "typescript": "^5.8.3"
   }
