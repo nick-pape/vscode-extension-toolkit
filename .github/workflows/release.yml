@@ -48,7 +48,13 @@ jobs:
         echo "Package contents that will be published:"
         npm pack --dry-run
         
+    - name: Log working directory state
+      run: |
+        echo "Logging working directory state before publishing..."
+        git status
+        git diff
+        
     - name: Publish to NPM
-      run: pnpm publish
+      run: pnpm publish --no-git-checks
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
