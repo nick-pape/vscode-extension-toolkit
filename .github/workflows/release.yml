@@ -25,9 +25,12 @@ jobs:
         version: latest
         
     - name: Configure npm authentication
-      run: |
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-        echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        registry-url: 'https://registry.npmjs.org'
+        scope: '@your-scope'
+        auth-token: ${{ secrets.NPM_TOKEN }}
         
     - name: Get pnpm store directory
       shell: bash
