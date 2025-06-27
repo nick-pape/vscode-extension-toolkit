@@ -1,6 +1,6 @@
 {
   "name": "vscode-extension-toolkit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A toolkit providing a more structured method for creating VSCode extensions.",
   "main": "lib/index.js",
   "types": "dist/vscode-extension-toolkit.d.ts",
