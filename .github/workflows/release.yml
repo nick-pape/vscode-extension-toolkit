@@ -16,44 +16,41 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20.x'
+        node-version: '22.x'
         registry-url: 'https://registry.npmjs.org'
         
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: latest
-        
-    - name: Configure npm authentication
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-        registry-url: 'https://registry.npmjs.org'
-        scope:
-        token: ${{ secrets.NPM_TOKEN }}
-        
-    - name: Get pnpm store directory
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+    - name: Verify Rush installation
+      run: node common/scripts/install-run-rush.js --version
         
     - name: Setup pnpm cache
       uses: actions/cache@v4
       with:
-        path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        path: common/temp/pnpm-store
+        key: ${{ runner.os }}-rush-pnpm-${{ hashFiles('common/config/rush/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+          ${{ runner.os }}-rush-pnpm-
           
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+    - name: Setup Rush build cache
+      uses: actions/cache@v4
+      with:
+        path: common/temp/build-cache
+        key: ${{ runner.os }}-rush-build-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-rush-build-
+          
+    - name: Rush install
+      run: node common/scripts/install-run-rush.js install
       
-    - name: Build package
-      run: pnpm run build
+    - name: Rush build
+      run: node common/scripts/install-run-rush.js build
+      
+    - name: Generate documentation
+      run: node common/scripts/install-run-rush.js generate-docs
       
     - name: Verify package contents
       run: |
         echo "Package contents that will be published:"
+        cd vscode-extension-toolkit
         npm pack --dry-run
         
     - name: Log working directory state
@@ -63,6 +60,8 @@ jobs:
         git diff
 
     - name: Publish to NPM
-      run: npm publish
+      run: |
+        cd vscode-extension-toolkit
+        npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

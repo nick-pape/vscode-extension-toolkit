@@ -11,6 +11,16 @@
    * "rush my-global-command --help".
    */
   "commands": [
+    {
+      "commandKind": "bulk",
+      "name": "generate-docs",
+      "summary": "Generate API documentation",
+      "description": "Generate API documentation using api-documenter",
+      "safeForSimultaneousRushProcesses": true,
+      "enableParallelism": true,
+      "allowWarningsInSuccessfulBuild": false,
+      "incremental": false
+    }
     // {
     //   /**
     //    * (Required) Determines the type of custom command.

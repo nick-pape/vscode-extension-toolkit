@@ -24,33 +24,43 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: latest
-        
-    - name: Get pnpm store directory
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+    - name: Verify Rush installation
+      run: node common/scripts/install-run-rush.js --version
         
     - name: Setup pnpm cache
       uses: actions/cache@v4
       with:
-        path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        path: common/temp/pnpm-store
+        key: ${{ runner.os }}-rush-pnpm-${{ hashFiles('common/config/rush/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+          ${{ runner.os }}-rush-pnpm-
           
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+    - name: Setup Rush build cache
+      uses: actions/cache@v4
+      with:
+        path: common/temp/build-cache
+        key: ${{ runner.os }}-rush-build-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-rush-build-
+          
+    - name: Rush install
+      run: node common/scripts/install-run-rush.js install
       
-    - name: Run build
-      run: pnpm run build
+    - name: Rush build
+      run: node common/scripts/install-run-rush.js build
       
+    - name: Generate documentation
+      run: node common/scripts/install-run-rush.js generate-docs
+      
+    - name: Validate Rush configuration
+      run: |
+        echo "Validating Rush configuration..."
+        node common/scripts/install-run-rush.js --help > /dev/null
+        echo "✓ Rush configuration is valid"
+        
     - name: Check for build artifacts
       run: |
         echo "Checking for built files..."
-        ls -la lib/
-        ls -la docs/markdown/
+        ls -la vscode-extension-toolkit/lib/
+        ls -la vscode-extension-toolkit/docs/markdown/
         echo "Build artifacts verified!"

@@ -197,6 +197,25 @@ Comprehensive API documentation is available in the [`docs/`](./docs/markdown/in
 
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details on how to get started.
 
+### Development Setup
+
+This project uses Rush for monorepo management. See the [Setup Guide](../SETUP.md) for detailed development instructions.
+
+Quick start:
+```bash
+# Install Rush globally
+npm install -g @microsoft/rush
+
+# Install dependencies
+rush install
+
+# Build the project
+rush build
+
+# Generate documentation
+rush generate-docs
+```
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
